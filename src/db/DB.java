@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class DB {
@@ -25,7 +27,7 @@ public class DB {
 		}
 		return conn;
 	}
-	// METHODO PARA DESCONECTAR COM O BANCO DE DADOS
+	// METODO PARA DESCONECTAR COM O BANCO DE DADOS
 	public static void closeConnection() {
 		if(conn != null) {
 			try {
@@ -36,7 +38,7 @@ public class DB {
 			}
 		}
 	}
-	// METHODO PARA LER AS PROPRIEDADES DE CONNECÇÃO COM O BD
+	// METODO PARA LER AS PROPRIEDADES DE CONEXÃO COM O BD
 	private static Properties loadProperties() {
 		try(FileInputStream fs = new FileInputStream("db.properties")){
 			Properties props = new Properties();
@@ -47,4 +49,27 @@ public class DB {
 			throw new DbException(e.getMessage());
 		}
 	}
+	
+	//METODO AUXILIAR PARA FECHAR O STATEMENT
+	public static void closeStatement(Statement st) {
+		if(st != null) {
+			try {
+				st.close();
+			} catch (SQLException e) {
+				throw new DbException(e.getMessage());
+			}
+		}
+	}
+	
+	//METODO AUXILIAR PARA FECHAR O RESULTSET
+	public static void closeResultSet(ResultSet rs) {
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				throw new DbException(e.getMessage());
+			}
+		}
+	}
+	
 }
