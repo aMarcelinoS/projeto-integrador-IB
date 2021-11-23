@@ -1,6 +1,8 @@
-package entities;
+package model.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Vacina implements Serializable{
@@ -9,6 +11,8 @@ public class Vacina implements Serializable{
 	private Integer Id;
 	private String marca;
 	private String nome;
+	
+	List<Vacina> list = new ArrayList<>();
 	
 	public Vacina(Integer id, String marca, String nome) {
 		Id = id;

@@ -3,8 +3,8 @@ package application;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import entities.Paciente;
-import entities.Vacina;
+import model.entities.Paciente;
+import model.entities.Vacina;
 
 public class Program {
 
