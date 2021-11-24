@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Paciente implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	
+	private Integer id;
 	private String cpf;
 	private String nome;
 	private Integer idade;
@@ -16,15 +17,15 @@ public class Paciente implements Serializable  {
 	private String vacinado;
 	private Date data;
 	private Integer dose;
-	private String marca;
 	
 	private Vacina vacina;
 
 	public Paciente() {
 	}
 
-	public Paciente(String cpf, String nome, Integer idade, String fone, String endereco, String regiao,
-			String vacinado, Date data, Integer dose, String marca, Vacina vacina) {
+	public Paciente(Integer id, String cpf, String nome, Integer idade, String fone, String endereco, String regiao,
+			String vacinado, Date data, Integer dose, Vacina vacina) {
+		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
 		this.idade = idade;
@@ -34,8 +35,15 @@ public class Paciente implements Serializable  {
 		this.vacinado = vacinado;
 		this.data = data;
 		this.dose = dose;
-		this.marca = marca;
 		this.vacina = vacina;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getCpf() {
@@ -110,14 +118,6 @@ public class Paciente implements Serializable  {
 		this.dose = dose;
 	}
 
-	public String getMarca() {
-		return marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
 	public Vacina getVacina() {
 		return vacina;
 	}
@@ -128,7 +128,7 @@ public class Paciente implements Serializable  {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cpf);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -140,13 +140,13 @@ public class Paciente implements Serializable  {
 		if (getClass() != obj.getClass())
 			return false;
 		Paciente other = (Paciente) obj;
-		return Objects.equals(cpf, other.cpf);
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
-		return "Paciente [cpf=" + cpf + ", nome=" + nome + ", idade=" + idade + ", fone=" + fone + ", endereco="
-				+ endereco + ", regiao=" + regiao + ", vacinado=" + vacinado + ", data=" + data + ", dose=" + dose
-				+ ", marca=" + marca + ", vacina=" + vacina + "]";
+		return "Paciente [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", idade=" + idade + ", fone=" + fone
+				+ ", endereco=" + endereco + ", regiao=" + regiao + ", vacinado=" + vacinado + ", data=" + data
+				+ ", dose=" + dose + ", vacina=" + vacina + "]";
 	}
 }

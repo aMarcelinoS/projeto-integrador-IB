@@ -8,22 +8,26 @@ import java.util.Objects;
 public class Vacina implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private Integer Id;
+	private Integer id;
 	private String marca;
 	private String nome;
 	
 	List<Vacina> list = new ArrayList<>();
 	
+	
+	public Vacina() {
+	}
+	
 	public Vacina(Integer id, String marca, String nome) {
-		Id = id;
+		this.id = id;
 		this.marca = marca;
 		this.nome = nome;
 	}
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getMarca() {
 		return marca;
@@ -40,7 +44,7 @@ public class Vacina implements Serializable{
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(Id);
+		return Objects.hash(id);
 	}
 	
 	@Override
@@ -52,12 +56,12 @@ public class Vacina implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Vacina other = (Vacina) obj;
-		return Objects.equals(Id, other.Id);
+		return Objects.equals(id, other.id);
 	}
 	
 	@Override
 	public String toString() {
-		return "Vacina [Id=" + Id + ", marca=" + marca + ", nome=" + nome + "]";
+		return "[id=" + id + ", marca=" + marca + ", nome=" + nome + "]";
 	}
 	
 	
