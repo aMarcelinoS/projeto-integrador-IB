@@ -17,6 +17,7 @@ public class Paciente implements Serializable  {
 	private String vacinado;
 	private Date data;
 	private Integer dose;
+	private Integer idVac;
 	
 	private Vacina vacina;
 
@@ -24,7 +25,7 @@ public class Paciente implements Serializable  {
 	}
 
 	public Paciente(Integer id, String cpf, String nome, Integer idade, String fone, String endereco, String regiao,
-			String vacinado, Date data, Integer dose, Vacina vacina) {
+			String vacinado, Date data, Integer dose,Integer idVac, Vacina vacina) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
@@ -35,6 +36,7 @@ public class Paciente implements Serializable  {
 		this.vacinado = vacinado;
 		this.data = data;
 		this.dose = dose;
+		this.idVac = idVac;
 		this.vacina = vacina;
 	}
 	
@@ -126,6 +128,14 @@ public class Paciente implements Serializable  {
 		this.vacina = vacina;
 	}
 
+	public Integer getIdVac() {
+		return idVac;
+	}
+
+	public void setIdVac(Integer idVac) {
+		this.idVac = idVac;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -147,6 +157,6 @@ public class Paciente implements Serializable  {
 	public String toString() {
 		return "Paciente [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", idade=" + idade + ", fone=" + fone
 				+ ", endereco=" + endereco + ", regiao=" + regiao + ", vacinado=" + vacinado + ", data=" + data
-				+ ", dose=" + dose + ", vacina=" + vacina + "]";
+				+ ", dose=" + dose + ", idVac=" + idVac + ", vacina=" + vacina + "]";
 	}
 }

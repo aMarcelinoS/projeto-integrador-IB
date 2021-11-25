@@ -1,5 +1,6 @@
 package application;
 
+import java.util.Date;
 import java.util.List;
 
 import model.dao.DaoFactory;
@@ -20,7 +21,7 @@ public class Program {
 		System.out.println(pac);
 		
 		System.out.println("\n==== TEST 2: busca pacientes pelo Id da vacina - findByVacina");
-		Vacina vac = new Vacina(002, null, null);
+		Vacina vac = new Vacina(004, null, null);
 		List<Paciente> list = pacientedao.findByVacina(vac);
 		for (Paciente x : list) {
 			System.out.println(x);
@@ -32,6 +33,12 @@ public class Program {
 		for (Paciente x : list) {
 			System.out.println(x);
 		}
+		
+		System.out.println("\n==== TEST 3: insere pacientes no BD - Insert");
+		Paciente paciente = new Paciente(null, "025.310.408-29", "Marcelo Soares", 32, "(67) 99801-2548", "Rua Alegre, Nº 123, Capital", "Noroeste", "S", new Date(), 2, 004, vac);
+		pacientedao.insert(paciente);
+		System.out.println("Inserido com sucesso! Novo Id = " + paciente.getId());
+		
 		
 	}
 

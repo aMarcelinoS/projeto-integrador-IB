@@ -1,9 +1,12 @@
 package model.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +19,7 @@ import model.entities.Paciente;
 import model.entities.Vacina;
 
 public class PacienteDaoJDBC implements PacienteDao {
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
 	private Connection conn;
 	
@@ -23,10 +27,50 @@ public class PacienteDaoJDBC implements PacienteDao {
 		this.conn = conn;
 	}
 
+	//MÉTODO PARA INSERIR NOVOS PACIENTES
 	@Override
 	public void insert(Paciente obj) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
 		
+		try {
+			st = conn.prepareStatement( 
+					"INSERT INTO tbpaciente "
+					+ "(CPF, Nome, Idade, Telefone, Endereço, Regiao, Vacinado, Data_da_Vacinacao, Dose, Id_Vacina) "
+					+ "VALUES "
+					+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					Statement.RETURN_GENERATED_KEYS);
+						
+			st.setString(1, obj.getCpf());
+			st.setString(2, obj.getNome());
+			st.setInt(3, obj.getIdade());
+			st.setString(4, obj.getFone());
+			st.setString(5, obj.getEndereco());
+			st.setString(6, obj.getRegiao());
+			st.setString(7, obj.getVacinado());
+			st.setDate(8, new java.sql.Date(obj.getData().getTime()));
+			st.setInt(9, obj.getDose());
+			st.setInt(10, obj.getIdVac());
+			
+			int rowsAffected = st.executeUpdate();
+			
+			if (rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next()) {
+					int id = rs.getInt(1);
+					obj.setId(id);
+				}
+				DB.closeResultSet(rs);
+			}
+			else {
+				throw new DbException("Erro inesperado! Nenhuma linha foi afetada!");
+			}			
+		}
+		catch(SQLException e){
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
@@ -48,8 +92,8 @@ public class PacienteDaoJDBC implements PacienteDao {
 		ResultSet rs = null;
 		
 		try {			
-			st = conn.prepareStatement
-					("SELECT tbpaciente.*,tbvacina.Marca, tbvacina.Nome_da_Vacina "
+			st = conn.prepareStatement(
+					"SELECT tbpaciente.*,tbvacina.Marca, tbvacina.Nome_da_Vacina "
 					+ "FROM tbpaciente INNER JOIN tbvacina "
 					+ "ON tbpaciente.Id_Vacina = tbvacina.Id "
 					+ "WHERE tbpaciente.Id = ?");
@@ -78,11 +122,11 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
-			st = conn.prepareStatement
-					("SELECT tbpaciente.*, tbvacina.Marca, tbvacina.Nome_da_Vacina "
-							+ "FROM tbpaciente INNER JOIN tbvacina "
-							+ "ON tbpaciente.Id_Vacina = tbvacina.Id "
-							+ "ORDER BY Nome");
+			st = conn.prepareStatement(
+					"SELECT tbpaciente.*, tbvacina.Marca, tbvacina.Nome_da_Vacina "
+					+ "FROM tbpaciente INNER JOIN tbvacina "
+					+ "ON tbpaciente.Id_Vacina = tbvacina.Id "
+					+ "ORDER BY Nome");
 			
 			rs = st.executeQuery();
 			
@@ -115,12 +159,12 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;		
 		try {
-			st = conn.prepareStatement
-					("SELECT tbpaciente.*, tbvacina.Marca, tbvacina.Nome_da_Vacina "
-							+ "FROM tbpaciente INNER JOIN tbvacina "
-							+ "ON tbpaciente.Id_Vacina = tbvacina.Id "
-							+ "WHERE Id_Vacina = ? "
-							+ "ORDER BY Nome");
+			st = conn.prepareStatement(
+					"SELECT tbpaciente.*, tbvacina.Marca, tbvacina.Nome_da_Vacina "
+					+ "FROM tbpaciente INNER JOIN tbvacina "
+					+ "ON tbpaciente.Id_Vacina = tbvacina.Id "
+					+ "WHERE Id_Vacina = ? "
+					+ "ORDER BY Nome");
 
 			st.setInt(1, vacina.getId());
 			rs = st.executeQuery();
