@@ -1,7 +1,6 @@
 package model.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,7 +74,35 @@ public class PacienteDaoJDBC implements PacienteDao {
 
 	@Override
 	public void update(Paciente obj) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement(
+					"UPDATE tbpaciente SET CPF = ?, Nome = ?, Idade = ?, Telefone = ?, Endereço = ?, "
+					+ "Regiao = ?, Vacinado = ?, Data_da_Vacinacao = ?, Dose = ?, Id_Vacina = ? "
+					+ "WHERE tbpaciente.Id = ? ",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			st.setString(1, obj.getCpf());
+			st.setString(2, obj.getNome());
+			st.setInt(3, obj.getIdade());
+			st.setString(4, obj.getFone());
+			st.setString(5, obj.getEndereco());
+			st.setString(6, obj.getRegiao());
+			st.setString(7, obj.getVacinado());
+			st.setDate(8, new java.sql.Date(obj.getData().getTime()));
+			st.setInt(9, obj.getDose());
+			st.setInt(10, obj.getIdVac());
+			st.setInt(11, obj.getId());
+			
+			st.executeUpdate();			
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 		
 	}
 

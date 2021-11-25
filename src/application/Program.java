@@ -34,10 +34,16 @@ public class Program {
 			System.out.println(x);
 		}
 		
-		System.out.println("\n==== TEST 3: insere pacientes no BD - Insert");
+		/*System.out.println("\n==== TEST 4: insere pacientes no BD - Insert");
 		Paciente paciente = new Paciente(null, "025.310.408-29", "Marcelo Soares", 32, "(67) 99801-2548", "Rua Alegre, Nº 123, Capital", "Noroeste", "S", new Date(), 2, 004, vac);
 		pacientedao.insert(paciente);
-		System.out.println("Inserido com sucesso! Novo Id = " + paciente.getId());
+		System.out.println("Inserido com sucesso! Novo Id = " + paciente.getId());*/
+		
+		System.out.println("\n==== TEST 5: Altera dados de pacientes no BD - Update");
+		pac = pacientedao.findById(8);
+		pac.setIdVac(003);
+		pacientedao.update(pac);
+		System.out.println("Atualizado com sucesso!");
 		
 		
 	}
