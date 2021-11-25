@@ -76,7 +76,6 @@ public class PacienteDaoJDBC implements PacienteDao {
 	@Override
 	public void update(Paciente obj) {
 		PreparedStatement st = null;
-		
 		try {
 			st = conn.prepareStatement(
 					"UPDATE tbpaciente SET CPF = ?, Nome = ?, Idade = ?, Telefone = ?, Endereço = ?, "
@@ -126,7 +125,6 @@ public class PacienteDaoJDBC implements PacienteDao {
 	public Paciente findById(Integer id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		
 		try {			
 			st = conn.prepareStatement(
 					"SELECT tbpaciente.*,tbvacina.Marca, tbvacina.Nome_da_Vacina "
