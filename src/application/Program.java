@@ -2,6 +2,7 @@ package application;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import model.dao.DaoFactory;
 import model.dao.PacienteDao;
@@ -11,7 +12,7 @@ import model.entities.Vacina;
 public class Program {
 
 	public static void main(String[] args) {
-		//SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Scanner sc = new Scanner(System.in);
 		
 		
 		PacienteDao pacientedao = DaoFactory.createPacienteDao();
@@ -34,10 +35,10 @@ public class Program {
 			System.out.println(x);
 		}
 		
-		/*System.out.println("\n==== TEST 4: insere pacientes no BD - Insert");
+		System.out.println("\n==== TEST 4: insere pacientes no BD - Insert");
 		Paciente paciente = new Paciente(null, "025.310.408-29", "Marcelo Soares", 32, "(67) 99801-2548", "Rua Alegre, Nº 123, Capital", "Noroeste", "S", new Date(), 2, 004, vac);
 		pacientedao.insert(paciente);
-		System.out.println("Inserido com sucesso! Novo Id = " + paciente.getId());*/
+		System.out.println("Inserido com sucesso! Novo Id = " + paciente.getId());
 		
 		System.out.println("\n==== TEST 5: Altera dados de pacientes no BD - Update");
 		pac = pacientedao.findById(8);
@@ -45,7 +46,14 @@ public class Program {
 		pacientedao.update(pac);
 		System.out.println("Atualizado com sucesso!");
 		
+		System.out.println("\n==== TEST 6: Deleta pacientes no BD pelo Id - deleteById");
+		System.out.print("Entre com Id do paciente a ser excluído: ");
+		int id = sc.nextInt();
+		pacientedao.deleteById(id);
+		System.out.println("Deletado com sucesso!");
 		
+		
+		sc.close();
 	}
 
 }

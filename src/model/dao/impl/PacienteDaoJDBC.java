@@ -72,6 +72,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 		}
 	}
 
+	//MÉTODO PARA ALTERAR DADOS DOS PACIENTES
 	@Override
 	public void update(Paciente obj) {
 		PreparedStatement st = null;
@@ -102,14 +103,22 @@ public class PacienteDaoJDBC implements PacienteDao {
 		}
 		finally {
 			DB.closeStatement(st);
-		}
-		
+		}		
 	}
 
+	//MÉTODO PARA DELETAR UM PACIENTE COM SEUS DADOS PELO ID
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("DELETE FROM tbpaciente WHERE Id = ? ");
+			
+			st.setInt(1, id);			
+			st.executeUpdate();			
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}		
 	}
 	
 	//MÉTODO PARA BUSCAR NO BANCO DE DADOS UM PACIENTE PELO O ID 
