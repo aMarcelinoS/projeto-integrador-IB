@@ -72,10 +72,41 @@ public class PacienteDaoJDBC implements PacienteDao {
 		}
 	}
 
+	//MÉTODO PARA BUSCAR TODOS OS PACIENTES NO BANCO DE DADOS
 	@Override
 	public List<Paciente> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement
+					("SELECT tbpaciente.*, tbvacina.Marca, tbvacina.Nome_da_Vacina "
+							+ "FROM tbpaciente INNER JOIN tbvacina "
+							+ "ON tbpaciente.Id_Vacina = tbvacina.Id "
+							+ "ORDER BY Nome");
+			
+			rs = st.executeQuery();
+			
+			List<Paciente> list = new ArrayList<>();
+			Map<Integer, Vacina> map = new HashMap<>();
+
+			while(rs.next()) {
+				Vacina vac = map.get(rs.getInt("Id_Vacina"));
+				if(vac == null) {					
+					vac = instantiateVacina(rs);
+					map.put(rs.getInt("Id_Vacina"), vac);
+				}
+				Paciente pac = instantiatePaciente(rs, vac);
+				list.add(pac);
+			}
+			return list;			
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}		
 	}
 	
 	//MÉTODO PARA BUSCAR NO BANCO DE DADOS PACIENTES QUE FORAM VACINADAS POR UMA DETERMINADA VACINA
@@ -99,7 +130,6 @@ public class PacienteDaoJDBC implements PacienteDao {
 
 			while(rs.next()) {
 				Vacina vac = map.get(rs.getInt("Id_Vacina"));
-
 				if(vac == null) {					
 					vac = instantiateVacina(rs);
 					map.put(rs.getInt("Id_Vacina"), vac);
