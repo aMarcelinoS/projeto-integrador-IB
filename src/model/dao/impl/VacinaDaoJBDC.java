@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import db.DB;
@@ -68,8 +69,31 @@ public class VacinaDaoJBDC implements VacinaDao {
 
 	@Override
 	public List<Vacina> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("SELECT * FROM tbvacina");
+			
+			rs = st.executeQuery();
+			
+			List<Vacina> list = new LinkedList<Vacina>();
+			
+			while(rs.next()) {
+				Vacina vac = new Vacina();
+				vac.setId(rs.getInt("Id"));
+				vac.setMarca(rs.getString("Marca"));
+				vac.setNome(rs.getString("Nome_da_Vacina"));
+				list.add(vac);
+			}
+			return list;				
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 }
