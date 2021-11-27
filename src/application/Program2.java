@@ -30,8 +30,14 @@ public class Program2 {
 		System.out.println("\n==== TEST 4: altera dados da vacina no BD - update");
 		vac = vacinaDao.findById(5);
 		vac.setMarca("Covax/India");
-		vacinaDao.update(vac);
+		//vacinaDao.update(vac);
 		System.out.println("Atualizado com sucesso!");
+		
+		System.out.println("\n==== TEST 5: deleta vacina do BD - update");
+		vacinaDao.deleteById(5);
+		System.out.println("Excluído com sucesso");
+		
+		
 		
 	}
 
