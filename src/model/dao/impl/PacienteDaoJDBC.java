@@ -80,8 +80,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 			st = conn.prepareStatement(
 					"UPDATE tbpaciente SET CPF = ?, Nome = ?, Idade = ?, Telefone = ?, Endereço = ?, "
 					+ "Regiao = ?, Vacinado = ?, Data_da_Vacinacao = ?, Dose = ?, Id_Vacina = ? "
-					+ "WHERE tbpaciente.Id = ? ",
-					Statement.RETURN_GENERATED_KEYS);
+					+ "WHERE tbpaciente.Id = ? ");
 			
 			st.setString(1, obj.getCpf());
 			st.setString(2, obj.getNome());

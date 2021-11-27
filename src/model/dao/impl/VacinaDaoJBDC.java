@@ -58,8 +58,24 @@ public class VacinaDaoJBDC implements VacinaDao {
 
 	@Override
 	public void update(Vacina obj) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE tbvacina SET Marca = ?, Nome_da_Vacina = ? "
+					+ "WHERE tbvacina.Id = ?");
+			
+			st.setString(1, obj.getMarca());
+			st.setString(2, obj.getNome());
+			st.setInt(3, obj.getId());
+			
+			st.executeUpdate();
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
