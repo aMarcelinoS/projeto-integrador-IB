@@ -22,7 +22,10 @@ public class Program2 {
 		vacina = vacinaDao.findAll();
 		System.out.println(vacina);	
 		
-		
+		System.out.println("\n==== TEST 3: insere pacientes imunizados no BD - insert");
+		vac = new Vacina (null, "Covax", "Covaxin");
+		vacinaDao.insert(vac);
+		System.out.println("Inserido com sucesso!" + "Id Nº: " + vac.getId());
 			
 
 	}

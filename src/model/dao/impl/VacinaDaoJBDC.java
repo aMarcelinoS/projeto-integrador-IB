@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,8 +23,37 @@ public class VacinaDaoJBDC implements VacinaDao {
 
 	@Override
 	public void insert(Vacina obj) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"INSERT INTO tbvacina (Marca, Nome_da_Vacina) "
+					+ "VALUES "
+					+ "(?, ?)", 
+					Statement.RETURN_GENERATED_KEYS);
+
+			st.setString(1, obj.getMarca());
+			st.setString(2, obj.getNome());
+
+			int rowsAffected = st.executeUpdate();
+
+			if(rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next()) {
+					int id = rs.getInt(1);
+					obj.setId(id);
+				}
+				DB.closeResultSet(rs);
+			}
+			else {
+				throw new DbException("Erro inesperado! Nenhuma linha foi afetada!");
+			}
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override

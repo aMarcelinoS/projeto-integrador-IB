@@ -12,9 +12,7 @@ public class Vacina implements Serializable{
 	private String marca;
 	private String nome;
 	
-	List<Vacina> list = new ArrayList<>();
-	
-	
+		
 	public Vacina() {
 	}
 	
