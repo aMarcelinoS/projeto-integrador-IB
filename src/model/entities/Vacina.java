@@ -1,8 +1,6 @@
 package model.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Vacina implements Serializable{

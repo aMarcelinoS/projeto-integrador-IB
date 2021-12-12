@@ -13,3 +13,5 @@ public class DaoFactory {
 		return new VacinaDaoJBDC(DB.getConnection());
 	} 
 }
+
+//CLASSE RESPONSÁVEL POR INSTANCIAR OS DAOS
