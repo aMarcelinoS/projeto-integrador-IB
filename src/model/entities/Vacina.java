@@ -57,10 +57,14 @@ public class Vacina implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "[id=" + id + ", marca=" + marca + ", nome=" + nome + "]";
-	}
-	
-	
+		return "-"
+			+ " | "
+			+ id 
+			+ " | " 
+			+ marca 
+			+ " | " 
+			+ nome;
+	}	
 }
 
 

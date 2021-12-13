@@ -238,14 +238,16 @@ public class PacienteDaoJDBC implements PacienteDao {
 		pac.setVacinado(rs.getString("Vacinado"));
 		pac.setData(rs.getDate("Data_da_Vacinacao"));
 		pac.setDose(rs.getInt("Dose"));
+		pac.setIdVac(rs.getInt("Id_Vacina"));
 		pac.setVacina(vac);
+		
 		return pac;
 	}
 	
 	//FUNÇÃO AUXILIAR PARA INSTANCIAR A CLASSE VACINA
 	private Vacina instantiateVacina(ResultSet rs) throws SQLException {
 		Vacina vac = new Vacina();
-		vac.setId(rs.getInt("Id_Vacina"));
+		vac.setId(rs.getInt("Id"));
 		vac.setMarca(rs.getString("Marca"));
 		vac.setNome(rs.getString("Nome_da_Vacina"));
 		return vac;

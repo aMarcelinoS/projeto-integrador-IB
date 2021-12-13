@@ -25,7 +25,7 @@ public class Paciente implements Serializable  {
 	}
 
 	public Paciente(Integer id, String cpf, String nome, Integer idade, String fone, String endereco, String regiao,
-			String vacinado, Date data, Integer dose,Integer idVac, Vacina vacina) {
+			String vacinado, Date data, Integer dose, Integer idVac, Vacina vacina) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
@@ -155,8 +155,30 @@ public class Paciente implements Serializable  {
 
 	@Override
 	public String toString() {
-		return "Paciente [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", idade=" + idade + ", fone=" + fone
-				+ ", endereco=" + endereco + ", regiao=" + regiao + ", vacinado=" + vacinado + ", data=" + data
-				+ ", dose=" + dose + ", idVac=" + idVac + ", vacina=" + vacina + "]";
+		return "| "
+			+ id 
+			+ " | " 
+			+ cpf 
+			+ " | " 
+			+ nome 
+			+ " | " 
+			+ idade 
+			+ " | " 
+			+ fone
+			+ " | " 
+			+ endereco 
+			+ " | " 
+			+ regiao 
+			+ " | " 
+			+ vacinado 
+			+ " | " 
+			+ data
+			+ " | " 
+			+ dose 
+			+ " | "
+			+ idVac
+			+ " | "
+			+ vacina
+			+ " | ";
 	}
 }

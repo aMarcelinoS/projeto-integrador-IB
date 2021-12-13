@@ -19,24 +19,26 @@ public class Program {
 		
 		
 		PacienteDao pacientedao = DaoFactory.createPacienteDao();
-		 Vacina vac = new Vacina();
+		Paciente paciente = new Paciente();
+		Vacina vac = new Vacina();
 		
 		
 		
 		System.out.println();
-		System.out.println("1 - Cadastrar um novo paciente; ");
-		System.out.println("2 - Alterar paciente já cadastrado; ");
-		System.out.println("3 - Pesquisar um paciente pelo Id;");
-		System.out.println("4 - Pesquisar pacientes por vacina; ");
-		System.out.println("5 - Pesquisar todos pacientes cadastrados;");
-		System.out.println("6 - Deletar um paciente cadastrado. ");
+		System.out.println(" 1 - Cadastrar um novo paciente; ");
+		System.out.println(" 2 - Alterar cadastro; ");
+		System.out.println(" 3 - Pesquisar um paciente pelo Id;");
+		System.out.println(" 4 - Pesquisar pacientes por vacina; ");
+		System.out.println(" 5 - Pesquisar todos pacientes cadastrados;");
+		System.out.println(" 6 - Deletar um paciente cadastrado. ");
 		System.out.println();
 		System.out.print("Informe o que deseja realizar no sistema: ");
 		int num = sc.nextInt();
+		System.out.println();
 		
 		switch(num) {
 			case 1:
-				System.out.println("========== CADASTRO DE PACIENTES ===========");
+				System.out.println("==========| CADASTRO DE PACIENTES |===========");
 				System.out.println();
 				System.out.println("Digite as informações do cliente: ");
 				System.out.print("CPF: ");
@@ -62,10 +64,155 @@ public class Program {
 				System.out.print("Qual vacina o paciente tomou? ");
 				int vacId = sc.nextInt();
 				
-				Paciente paciente = new Paciente(null, cpf, nome, idade, tel, end, reg, vacina, data, dose, vacId, vac);
+				paciente = new Paciente(null, cpf, nome, idade, tel, end, reg, vacina, data, dose, vacId, vac);
 				pacientedao.insert(paciente);
-				System.out.println("Paciente cadastrado com sucesso.");				
+				System.out.println();
+				System.out.println("Paciente cadastrado com sucesso!");
+				break;
+				
+			case 2:
+				System.out.println("==========| ALTERAÇÃO DE CADASTRO |==========");
+				
+				System.out.println();
+				System.out.print("Informe o Id do paciente que deseja fazer alteração: ");
+				int Idpac = sc.nextInt();
+				paciente = pacientedao.findById(Idpac);
+				System.out.println();
+				System.out.println(paciente);
+				
+				System.out.println();
+				System.out.println(" 1 - CPF");
+				System.out.println(" 2 - Nome");
+				System.out.println(" 3 - Idade");
+				System.out.println(" 4 - Telefone");
+				System.out.println(" 5 - Endereço");
+				System.out.println(" 6 - Região");
+				System.out.println(" 7 - Data da Vacinação");
+				System.out.println(" 8 - Dose");
+				System.out.println(" 9 - Id da vacina");
+				System.out.println();
+				System.out.print("Informe o que deseja alterar: ");				
+				int num2 = sc.nextInt();
+				System.out.println();
+				
+								
+				switch(num2) {
+					case 1:
+						System.out.print("Digite o novo CPF: ");
+						cpf = sc.next();
+						
+						paciente.setCpf(cpf);
+						
+						pacientedao.update(paciente);
+						System.out.println();
+						System.out.println("Campo CPF atualizado!");
+						break;
+					
+					case 2:
+						System.out.print("Digite o novo nome: ");
+						sc.nextLine();
+						nome = sc.nextLine();
+						
+						paciente.setNome(nome);
+						
+						pacientedao.update(paciente);
+						System.out.println();
+						System.out.println("Campo nome atualizado!");
+						break;
+					
+					case 3:
+						System.out.print("Digite a nova idade: ");
+						idade = sc.nextInt();
+						
+						paciente.setIdade(idade);
+						
+						pacientedao.update(paciente);
+						System.out.println();
+						System.out.println("Campo idade atualizado!");
+						break;
+						
+					case 4:
+						System.out.print("Digite o novo telefone: ");
+						sc.nextLine();
+						tel = sc.nextLine();
+						
+						paciente.setFone(tel);
+						
+						pacientedao.update(paciente);
+						System.out.println();
+						System.out.println("Campo telefone atualizado!");
+						break;
+					
+					case 5:
+						System.out.print("Digite o novo endereço: ");
+						sc.nextLine();
+						end = sc.nextLine();
+						
+						paciente.setEndereco(end);
+						
+						pacientedao.update(paciente);
+						System.out.println();
+						System.out.println("Campo endereço atualizado!");
+						break;
+						
+					case 6:
+						System.out.print("Digite a nova região: ");
+						sc.nextLine();
+						reg = sc.nextLine();
+						
+						paciente.setRegiao(reg);
+						
+						pacientedao.update(paciente);
+						System.out.println();
+						System.out.println("Campo endereço atualizado!");
+						break;
+						
+					case 7:
+						System.out.print("Digite a nova data de vacinação: ");
+						data = sdf.parse(sc.next());
+						
+						paciente.setData(data);
+						
+						pacientedao.update(paciente);
+						System.out.println();
+						System.out.println("Campo data da vacinação atualizado!");
+						break;
+					
+					case 8:
+						System.out.print("Digite a novo número de dose: ");
+						dose = sc.nextInt();
+						
+						paciente.setDose(dose);
+						
+						pacientedao.update(paciente);
+						System.out.println();
+						System.out.println("Campo dose atualizado!");
+						break;
+					
+					case 9:
+						System.out.print("Digite a novo Id da vacina aplicada: ");
+						vacId = sc.nextInt();
+						
+						paciente.setIdVac(vacId);
+						
+						pacientedao.update(paciente);
+						System.out.println();
+						System.out.println("Campo Id da vacina atualizado!");
+						break;						
+				}
+				
+			case 3:
 		}
+				
+				
+				
+//				System.out.println("\n==== TEST 5: Altera dados de pacientes no BD - Update");
+//				paciente = pacientedao.findById(6);
+//				paciente.setNome("Carla Novaes");
+//				pacientedao.update(paciente);
+//				System.out.println("Atualizado com sucesso!");
+				
+	
 		
 		
 		
@@ -73,8 +220,8 @@ public class Program {
 		
 		
 //		System.out.println("==== TEST 1: busca paciente pelo Id - findById");
-//		Paciente pac = pacientedao.findById(4);
-//		System.out.println(pac);
+//		paciente = pacientedao.findById(6);
+//		System.out.println(paciente);
 		
 //		System.out.println("\n==== TEST 2: busca pacientes pelo Id da vacina - findByVacina");
 //		Vacina vac = new Vacina(002, null, null);
@@ -95,11 +242,7 @@ public class Program {
 //		pacientedao.insert(paciente);
 //		System.out.println("Inserido com sucesso! Novo Id = " + paciente.getId());
 //		
-//		System.out.println("\n==== TEST 5: Altera dados de pacientes no BD - Update");
-//		pac = pacientedao.findById(8);
-//		pac.setIdVac(003);
-//		pacientedao.update(pac);
-//		System.out.println("Atualizado com sucesso!");
+//		
 //		
 //		System.out.println("\n==== TEST 6: Deleta pacientes no BD pelo Id - deleteById");
 //		System.out.print("Entre com Id do paciente a ser excluído: ");
