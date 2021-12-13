@@ -234,7 +234,14 @@ public class Program {
 					System.out.println(x + "\n");
 				}
 				
+			case 5:
+				System.out.println("==========| PACIENTES CADASTRADOS |==========");
 				
+				System.out.println();
+				list = pacientedao.findAll();
+				for(Paciente p : list) {
+					System.out.println(p + "\n");
+				}
 				
 		}
 			
