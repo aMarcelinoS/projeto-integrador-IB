@@ -202,8 +202,44 @@ public class Program {
 				}
 				
 			case 3:
-		}
+				System.out.println("==========| PESQUISA DE PACIENTE |==========");
 				
+				System.out.println();
+				System.out.println("Informe o Id do paciente que deseja pesquisar: ");
+				int idPac = sc.nextInt();
+				
+				paciente = pacientedao.findById(idPac);
+				System.out.println();
+				System.out.println(paciente);
+				break;
+				
+			case 4:
+				System.out.println("==========| PESQUISA DE PACIENTE POR VACINA |==========");
+				
+				System.out.println();
+				System.out.println(" 001 - CoronaVac");
+				System.out.println(" 002 - AztraZeneca");
+				System.out.println(" 003 - Pfizer");
+				System.out.println(" 004 - Janssen");
+				
+				System.out.println();
+				System.out.print("Informe um Id: ");				
+				vacId = sc.nextInt();
+				
+				vac = new Vacina(vacId, null, null);
+				
+				System.out.println();
+				List<Paciente> list = pacientedao.findByVacina(vac);
+				for (Paciente x : list) {
+					System.out.println(x + "\n");
+				}
+				
+				
+				
+		}
+			
+		
+		
 				
 				
 //				System.out.println("\n==== TEST 5: Altera dados de pacientes no BD - Update");
@@ -220,7 +256,7 @@ public class Program {
 		
 		
 //		System.out.println("==== TEST 1: busca paciente pelo Id - findById");
-//		paciente = pacientedao.findById(6);
+//		paciente = pacientedao.findById(12);
 //		System.out.println(paciente);
 		
 //		System.out.println("\n==== TEST 2: busca pacientes pelo Id da vacina - findByVacina");

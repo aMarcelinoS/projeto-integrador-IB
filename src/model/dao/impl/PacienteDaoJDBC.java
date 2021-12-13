@@ -247,7 +247,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 	//FUNÇÃO AUXILIAR PARA INSTANCIAR A CLASSE VACINA
 	private Vacina instantiateVacina(ResultSet rs) throws SQLException {
 		Vacina vac = new Vacina();
-		vac.setId(rs.getInt("Id"));
+		vac.setId(rs.getInt("Id_Vacina"));
 		vac.setMarca(rs.getString("Marca"));
 		vac.setNome(rs.getString("Nome_da_Vacina"));
 		return vac;
