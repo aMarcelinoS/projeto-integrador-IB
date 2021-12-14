@@ -16,12 +16,11 @@ public class Program {
 	public static void main(String[] args) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Scanner sc = new Scanner(System.in);
-		
+
 		
 		PacienteDao pacientedao = DaoFactory.createPacienteDao();
 		Paciente paciente = new Paciente();
 		Vacina vac = new Vacina();
-		
 		
 		
 		System.out.println();
@@ -242,59 +241,27 @@ public class Program {
 				for(Paciente p : list) {
 					System.out.println(p + "\n");
 				}
-				
-		}
 			
-		
-		
+			case 6:
+				System.out.println("==========| EXCLUIR PACIENTE |==========");
 				
+				System.out.println();
+				System.out.print("Informe o Id do paciente que deseja excluir: ");
+				idPac = sc.nextInt();
 				
-//				System.out.println("\n==== TEST 5: Altera dados de pacientes no BD - Update");
-//				paciente = pacientedao.findById(6);
-//				paciente.setNome("Carla Novaes");
-//				pacientedao.update(paciente);
-//				System.out.println("Atualizado com sucesso!");
+				paciente = pacientedao.findById(idPac);
+				System.out.println();
+				System.out.println(paciente);
+				System.out.println();
+				System.out.print("Deseja realmente excluir esse paciente? [S/N]: ");
+				char resp = sc.next().charAt(0);
 				
-	
-		
-		
-		
-		
-		
-		
-//		System.out.println("==== TEST 1: busca paciente pelo Id - findById");
-//		paciente = pacientedao.findById(12);
-//		System.out.println(paciente);
-		
-//		System.out.println("\n==== TEST 2: busca pacientes pelo Id da vacina - findByVacina");
-//		Vacina vac = new Vacina(002, null, null);
-//		List<Paciente> list = pacientedao.findByVacina(vac);
-//		for (Paciente x : list) {
-//			System.out.println(x);
-//		}
-//		
-//		System.out.println("\n==== TEST 3: busca todos os pacientes no BD - findAll");
-//		
-//		list = pacientedao.findAll();
-//		for (Paciente x : list) {
-//			System.out.println(x);
-//		}
-//		
-//		System.out.println("\n==== TEST 4: insere pacientes no BD - Insert");
-//		Paciente paciente = new Paciente(null, "005.410.408-35", "Bob Silva", 32, "(67) 99801-1000", "Rua Alegre, Nº 1253, Capital", "Noroeste", "S", new Date(), 2, 004, vac);
-//		pacientedao.insert(paciente);
-//		System.out.println("Inserido com sucesso! Novo Id = " + paciente.getId());
-//		
-//		
-//		
-//		System.out.println("\n==== TEST 6: Deleta pacientes no BD pelo Id - deleteById");
-//		System.out.print("Entre com Id do paciente a ser excluído: ");
-//		int id = sc.nextInt();
-//		pacientedao.deleteById(id);
-//		System.out.println("Deletado com sucesso!");
-//		
-		
+				if(resp == 's') {
+					pacientedao.deleteById(idPac);
+					System.out.println();
+					System.out.println("Paciente excluído com sucesso!");
+				}				
+		}			
 		sc.close();
 	}
-
 }
