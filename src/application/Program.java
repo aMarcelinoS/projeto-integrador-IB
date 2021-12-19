@@ -199,12 +199,13 @@ public class Program {
 						System.out.println("Campo Id da vacina atualizado!");
 						break;						
 				}
+				break;
 				
 			case 3:
 				System.out.println("==========| PESQUISA DE PACIENTE |==========");
 				
 				System.out.println();
-				System.out.println("Informe o Id do paciente que deseja pesquisar: ");
+				System.out.print("Informe o Id do paciente que deseja pesquisar: ");
 				int idPac = sc.nextInt();
 				
 				paciente = pacientedao.findById(idPac);
@@ -230,8 +231,9 @@ public class Program {
 				System.out.println();
 				List<Paciente> list = pacientedao.findByVacina(vac);
 				for (Paciente x : list) {
-					System.out.println(x + "\n");
+					System.out.println(x + "\n");				
 				}
+				break;
 				
 			case 5:
 				System.out.println("==========| PACIENTES CADASTRADOS |==========");
@@ -241,7 +243,8 @@ public class Program {
 				for(Paciente p : list) {
 					System.out.println(p + "\n");
 				}
-			
+				break;
+				
 			case 6:
 				System.out.println("==========| EXCLUIR PACIENTE |==========");
 				
@@ -260,7 +263,8 @@ public class Program {
 					pacientedao.deleteById(idPac);
 					System.out.println();
 					System.out.println("Paciente excluído com sucesso!");
-				}				
+				}	
+				break;
 		}			
 		sc.close();
 	}

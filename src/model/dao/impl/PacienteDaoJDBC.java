@@ -159,7 +159,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 					"SELECT tbpaciente.*, tbvacina.Marca, tbvacina.Nome_da_Vacina "
 					+ "FROM tbpaciente INNER JOIN tbvacina "
 					+ "ON tbpaciente.Id_Vacina = tbvacina.Id "
-					+ "ORDER BY Nome");
+					+ "ORDER BY Id");
 			
 			rs = st.executeQuery();
 			
